@@ -48,9 +48,6 @@ func main() {
 	se := *scrapePaths0
 	scrapePaths := strings.Split(se, ",")
 
-	// if etcdURLRegistry == "" {
-	// 	panic("--etcd-url-registry should be defined")
-	// }
 	if etcdURLScrape == "" {
 		panic("--etcd-url-scrape should be defined")
 	}
@@ -85,11 +82,6 @@ func main() {
 	}
 
 	logrus.Infof("====Starting Promster====")
-	// logrus.Infof("Generating prometheus.yml")
-	// sourceCode, err := executeTemplate("/", "prometheus.tmpl", templateRulesMap)
-	// if err != nil {
-	// 	panic(err)
-	// }
 
 	logrus.Debugf("Updating prometheus file...")
 	time.Sleep(5 * time.Second)
@@ -293,10 +285,6 @@ func updatePrometheusTargets(scrapeTargets []string, promNodes []string) error {
 	if err != nil {
 		return err
 	}
-	// output, err0 := ExecShell("kill -HUP $(ps | grep prometheus | awk '{print $1}' | head -1)")
-	// if err0 != nil {
-	// 	logrus.Warnf("Could not reload Prometheus configuration. err=%s. output=%s", err0, output)
-	// }
 
 	return nil
 }
@@ -304,7 +292,7 @@ func updatePrometheusTargets(scrapeTargets []string, promNodes []string) error {
 func keepSelfNodeRegistered(reg *etcdregistry.EtcdRegistry, etcdServiceName string, ttl time.Duration) {
 	node := etcdregistry.Node{}
 	node.Name = getSelfNodeName()
-	logrus.Debugf("Registering Prometheus instance on ETCD registry. service=%; node=%s", etcdServiceName, node)
+	logrus.Debugf("Registering Prometheus instance on ETCD registry. service=%s; node=%s", etcdServiceName, node)
 	err := reg.RegisterNode(context.TODO(), etcdServiceName, node, ttl)
 	if err != nil {
 		panic(err)

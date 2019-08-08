@@ -140,9 +140,6 @@ func executeTemplate(dir string, templ string, input map[string]interface{}) (st
 	return buf.String(), nil
 }
 
-// func setValue(ctx context.Context, cli *clientv3.Client, kv clientv3.KV) {
-// 	lease, _ := cli.Grant(ctx, 1)
-// }
 func stringSha512(str string) string {
 	hashedByte := sha512.Sum512([]byte(str))
 	hashedString := string(hashedByte[:])

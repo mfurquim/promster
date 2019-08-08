@@ -4,6 +4,11 @@ import (
 	_ "errors"
 	_ "flag"
 	"fmt"
+    _ "crypto/sha256"
+    _ "crypto/sha512"
+    _ "crypto/sha1"
+    _ "crypto/md5"
+
 	_ "log"
 	_ "os"
 	_ "os/signal"
